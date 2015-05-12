@@ -8,11 +8,13 @@ import java.io.IOException;
 
 public class Logger {
 	private static final String fileName = "/home/hadoop/logger.txt";
+	public static final String HDFS_URL = "hdfs://node1:49000/user/hadoop/";
+	public static final int BLOCK_SIZE = 64 * 1024 * 1024;
 
 	public static void write(String log) {
 		try {
 			FileWriter writer = new FileWriter(fileName, true);
-			writer.write(log+"\n");
+			writer.write(log + "\n");
 			writer.close();
 		} catch (IOException e) {
 			return;

@@ -6,6 +6,7 @@ import java.util.StringTokenizer;
 public class PhotoData {
 	private long _timeTemp;
 	private String _fileName;
+	private long _fileSize;
 	private String _fileMD5;
 
 	private byte[] _image;
@@ -16,10 +17,13 @@ public class PhotoData {
 		_image = image;
 		_fileName = fileName;
 		_timeTemp = System.currentTimeMillis();
+		_fileSize = image.length;
 		_fileMD5 = MD5Util.getStringMD5(_image);
 
 		StringBuffer sb = new StringBuffer();
 		sb.append(String.valueOf(_timeTemp));
+		sb.append("_");
+		sb.append(String.valueOf(_fileSize));
 		sb.append("_");
 		sb.append(_fileName);
 		sb.append("_");
@@ -35,6 +39,7 @@ public class PhotoData {
 		StringTokenizer st = new StringTokenizer(_fileID, "_");
 		try {
 			_timeTemp = Long.parseLong(st.nextToken());
+			_fileSize = Long.parseLong(st.nextToken());
 			_fileName = st.nextToken();
 			_fileMD5 = st.nextToken();
 		} catch (NoSuchElementException e) {
@@ -42,6 +47,9 @@ public class PhotoData {
 		}
 	}
 
+	public int getFileSize() {
+		return (int) _fileSize;
+	}
 	public String getFileID() {
 		return _fileID;
 	}
